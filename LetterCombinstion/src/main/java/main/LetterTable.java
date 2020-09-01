@@ -18,9 +18,11 @@ public class LetterTable {
     public LetterTable() {
         letterTable = new ArrayList<String[]>();
     }
+
     public LetterTable(List<String[]> letterTable) {
         this.letterTable = letterTable;
     }
+
     public LetterTable(String[][] letterTable) {
         this.letterTable = Arrays.asList(letterTable);
     }
@@ -31,62 +33,59 @@ public class LetterTable {
      * @param size  要隨機幾組
      * @param base  每組基礎幾個
      * @param raise 每組額外增加數量最大
-     * @return  執行成功與否
+     * @return 執行成功與否
      */
-    public boolean randomTable(int size,int base,int raise){
+    public void randomTable(int size, int base, int raise) {
         Random r = new Random();
         letterTable.clear();
-        try {
-            for (int i = 0; i < size; i++) {
-                int size_1 = Math.min(r.nextInt(raise) + base,23);//23個字母，不能再更多了
-                String[] newStrings;
-                if (size_1 <= 0){
-                    newStrings = new String[]{""};
-                }else {
-                    newStrings = new String[size_1];
-                    for (int j = 0; j < size_1; j++) {
-                        char c = (char) (r.nextInt('z' - 'a') + 'a');
-                        if(Arrays.asList(newStrings).contains(String.valueOf(c)))
-                            j--;//有重複的就要重來
+        for (int i = 0; i < size; i++) {
+            int size_1 = Math.min(r.nextInt(raise) + base, 23);//23個字母，不能再更多了
+            String[] newStrings;
+            if (size_1 <= 0) {
+                newStrings = new String[]{""};
+            } else {
+                newStrings = new String[size_1];
+                for (int j = 0; j < size_1; j++) {
+                    char c = (char) (r.nextInt('z' - 'a') + 'a');
+                    if (Arrays.asList(newStrings).contains(String.valueOf(c))) {
+                        j--;//有重複的就要重來
+                    } else {
                         newStrings[j] = String.valueOf(c);
                     }
                 }
-                letterTable.add(newStrings);
             }
-            return true;
-        }catch (Exception e){
-            e.printStackTrace();
-            return false;
+            letterTable.add(newStrings);
         }
     }
 
     /**
      * 隨機輸入
+     *
      * @param size  輸入幾個
      * @param base  數字最小值
      * @param raise 數字最大值
      * @return input
      */
-    public int[] randomInput(int size,int base,int raise){
+    public int[] randomInput(int size, int base, int raise) {
         Random r = new Random();
-        if(size<=0)
-            size=1;
-        if(base<0)
-            base=0;
-        if(base>=letterTable.size())
-            base=letterTable.size()-1;
-        if(raise<=0)
-            raise=1;
-        if(raise+base>letterTable.size())
-            raise=letterTable.size()-base;
+        if (size <= 0)
+            size = 1;
+        if (base < 0)
+            base = 0;
+        if (base >= letterTable.size())
+            base = letterTable.size() - 1;
+        if (raise <= 0)
+            raise = 1;
+        if (raise + base > letterTable.size())
+            raise = letterTable.size() - base;
         int[] input = new int[size];
         for (int i = 0; i < size; i++) {
-            input[i]=r.nextInt(raise)+base;
+            input[i] = r.nextInt(raise) + base;
         }
         return input;
     }
 
-    public List<String> convert(int[] input){
+    public List<String> convert(int[] input) {
         List<String> result = new ArrayList<String>();
         result.add("");
         for (int in : input) {
