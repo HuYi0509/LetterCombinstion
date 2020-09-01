@@ -151,7 +151,6 @@ public class TestLetter {
         System.out.println("letterTable:");
         System.out.println(letterTable);
         int[] input = letterTable.randomInput(5, 0, 100);
-        ;
         System.out.println("input:" + Arrays.toString(input));
         List<String> output = letterTable.convert(input);
         System.out.println("output:" + output);
@@ -168,13 +167,25 @@ public class TestLetter {
     }
 
     /**
-     * 測試錯誤輸入
+     * 測試錯誤輸入12,49,86,74,79
      */
     @Test
     public void Test14() {
         LetterTable letterTable = new LetterTable();
         letterTable.randomTable(50, 26, 10);
         System.out.println(letterTable);
+
+    }
+    /**
+     * 測試輸入
+     */
+    @Test
+    public void Test15() {
+        LetterTable letterTable = new LetterTable(new String[][]{{""}, {""}, {"a", "b", "c"}, {"d", "e", "f"}, {"g", "h", "i"}, {"j", "k", "l"}, {"m", "n", "o"}, {"p", "q", "r", "s"}, {"t", "u", "v"}, {"w", "x", "y", "z"}});
+
+        int[] input = {12,49,86,74,79};
+        List<String> output = letterTable.convert(input);
+        System.out.println("output:" + output);
 
     }
 }

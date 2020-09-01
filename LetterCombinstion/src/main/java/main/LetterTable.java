@@ -89,6 +89,13 @@ public class LetterTable {
         List<String> result = new ArrayList<String>();
         result.add("");
         for (int in : input) {
+            while (in>=letterTable.size()||in<0){
+                if(in>=letterTable.size()) {
+                    in -= letterTable.size();
+                }else{
+                    in += letterTable.size();
+                }
+            }
             String[] strings = new String[result.size() * letterTable.get(in).length];
             for (int i = 0; i < result.size(); i++) {
                 for (int j = 0; j < letterTable.get(in).length; j++) {
